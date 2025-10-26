@@ -8,16 +8,21 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-5KC2P76W');</script>
   <!-- End Google Tag Manager -->
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sample HTML page with commonly used elements">
+  <meta name="description" content="Sample HTML page with CSS and JavaScript included">
   <title>My Sample HTML Page</title>
+  
+  <!-- Internal CSS -->
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       line-height: 1.6;
+      background-color: #ffffff;
+      transition: background-color 0.5s ease;
     }
     header, nav, main, aside, footer {
       padding: 20px;
@@ -32,11 +37,15 @@
       text-decoration: none;
       color: #333;
     }
+    nav a:hover {
+      color: #007BFF;
+    }
     section {
       background: #fafafa;
       padding: 15px;
       margin: 10px 0;
       border: 1px solid #ddd;
+      border-radius: 5px;
     }
     table, th, td {
       border: 1px solid #444;
@@ -46,6 +55,7 @@
     img {
       max-width: 100%;
       height: auto;
+      border-radius: 6px;
     }
     form {
       margin-top: 15px;
@@ -53,6 +63,32 @@
     input, select, textarea, button {
       margin-bottom: 10px;
       display: block;
+      padding: 8px;
+      width: 100%;
+      max-width: 400px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .dark-mode {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+    .dark-mode header, 
+    .dark-mode footer {
+      background: #333;
+      color: white;
+    }
+    .dark-mode section {
+      background: #2a2a2a;
+      border-color: #555;
     }
   </style>
 </head>
@@ -61,9 +97,11 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KC2P76W"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  
   <header>
     <h1>Welcome to My HTML Test Page</h1>
-    <p>This page demonstrates commonly used HTML elements.</p>
+    <p>This page demonstrates HTML, CSS, and JavaScript all together.</p>
+    <button id="themeToggle">Toggle Dark Mode</button>
   </header>
 
   <nav>
@@ -76,12 +114,12 @@
   <main>
     <section id="about">
       <h2>About This Page</h2>
-      <p>This is a <strong>sample webpage</strong> created to demonstrate basic <em>HTML features</em> including text formatting, media, lists, tables, and forms.</p>
+      <p>This is a <strong>sample webpage</strong> created to demonstrate HTML, CSS, and JavaScript together in one file.</p>
       <ul>
         <li>Text formatting</li>
         <li>Images and videos</li>
         <li>Tables and lists</li>
-        <li>Interactive form</li>
+        <li>Interactive form and buttons</li>
       </ul>
     </section>
 
@@ -129,7 +167,7 @@
 
     <section id="form">
       <h2>Contact Form</h2>
-      <form action="#" method="post">
+      <form id="contactForm" action="#" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" placeholder="Your name">
 
@@ -148,6 +186,8 @@
 
         <button type="submit">Submit</button>
       </form>
+
+      <p id="formStatus"></p>
     </section>
   </main>
 
@@ -157,13 +197,29 @@
   </aside>
 
   <footer>
-    <p>&copy; 2025 My Sample Page. Built with ❤️ for learning HTML.</p>
+    <p>&copy; 2025 My Sample Page. Built with ❤️ for learning HTML, CSS, and JavaScript.</p>
   </footer>
 
+  <!-- Internal JavaScript -->
   <script>
-    // Simple JavaScript example
+    // Log message
     console.log("Page loaded successfully!");
-  </script>
 
+    // Dark mode toggle
+    const toggleButton = document.getElementById("themeToggle");
+    toggleButton.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    // Simple form handler
+    const form = document.getElementById("contactForm");
+    const status = document.getElementById("formStatus");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault(); // stop actual form submission
+      status.textContent = "Thank you, " + form.name.value + "! Your message has been received.";
+      form.reset();
+    });
+  </script>
 </body>
 </html>
